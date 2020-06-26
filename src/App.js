@@ -33,10 +33,24 @@ class App extends Component {
     console.log("call the server");
   };
 
+  validateProperty = input => {
+    if (input.name === "userName") {
+      if (input.value.trim() === "") return "User name is required";
+    }
+    if (input.name === "password") {
+      if (input.value.trim() === "") return "Password is required";
+    }
+  };
+
   updateUserState = ({ target: input }) => {
+    const errors = { ...this.state.errors };
+    const errorMsg = this.validateProperty(input);
+    if (errorMsg) errors[input.name] = errorMsg;
+    else delete errors[input.name];
+
     const account = { ...this.state.account };
     account[input.name] = input.value;
-    this.setState({ account });
+    this.setState({ account, errors });
   };
 
   render() {
