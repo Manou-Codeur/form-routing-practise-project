@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Joi from "joi-browser";
 
 import Input from "./common/Input";
 
@@ -13,14 +14,22 @@ class App extends Component {
     errors: {},
   };
 
+  schema = {
+    userName: Joi.string().required().label("Username"),
+    password: Joi.string().required().label("Password"),
+  };
+
   validate = () => {
-    const { account } = this.state;
+    const options = { abortEarly: false };
+    const result = Joi.validate(this.state.account, this.schema, options);
+
+    if (!result.error) return null;
+
     const errors = {};
-
-    if (account.userName === "") errors.userName = "userName required!";
-    if (account.password === "") errors.password = "password required!";
-
-    return Object.keys(errors).length === 0 ? null : errors;
+    for (let els of result.error.details) {
+      errors[els.path[0]] = els.message;
+    }
+    return errors;
   };
 
   preventDefault = e => {
@@ -33,13 +42,11 @@ class App extends Component {
     console.log("call the server");
   };
 
-  validateProperty = input => {
-    if (input.name === "userName") {
-      if (input.value.trim() === "") return "User name is required";
-    }
-    if (input.name === "password") {
-      if (input.value.trim() === "") return "Password is required";
-    }
+  validateProperty = ({ name, value }) => {
+    const obj = { [name]: value };
+    const schema = { [name]: this.schema[name] };
+    const { error } = Joi.validate(obj, schema);
+    return error ? error.details[0].message : null;
   };
 
   updateUserState = ({ target: input }) => {
