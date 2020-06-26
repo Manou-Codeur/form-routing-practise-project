@@ -1,42 +1,57 @@
 import React, { Component } from "react";
+
+import Input from "./common/Input";
+
 import "./App.css";
 
 class App extends Component {
+  state = {
+    account: {
+      userName: "",
+      password: "",
+    },
+    errors: {},
+  };
+
+  validate = () => {
+    return { username: "User name is required" };
+  };
+
+  preventDefault = e => {
+    e.preventDefault();
+
+    const errors = this.validate();
+    this.setState({ errors });
+    if (errors) return;
+
+    console.log("call the server");
+  };
+
+  updateUserState = ({ target: input }) => {
+    const account = { ...this.state.account };
+    account[input.name] = input.value;
+    this.setState({ account });
+  };
+
   render() {
+    const { account } = this.state;
+
     return (
-      <form>
-        <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
-
-        <div className="form-group form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
-          </label>
-        </div>
+      <form onSubmit={this.preventDefault}>
+        <Input
+          label="User Name"
+          name="userName"
+          value={account.userName}
+          onChange={this.updateUserState}
+          type="text"
+        />
+        <Input
+          label="Password"
+          name="password"
+          value={account.password}
+          onChange={this.updateUserState}
+          type="password"
+        />
 
         <button type="submit" className="btn btn-primary">
           Submit
