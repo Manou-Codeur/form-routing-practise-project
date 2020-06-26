@@ -14,14 +14,20 @@ class App extends Component {
   };
 
   validate = () => {
-    return { username: "User name is required" };
+    const { account } = this.state;
+    const errors = {};
+
+    if (account.userName === "") errors.userName = "userName required!";
+    if (account.password === "") errors.password = "password required!";
+
+    return Object.keys(errors).length === 0 ? null : errors;
   };
 
   preventDefault = e => {
     e.preventDefault();
 
     const errors = this.validate();
-    this.setState({ errors });
+    this.setState({ errors: errors || {} });
     if (errors) return;
 
     console.log("call the server");
@@ -34,7 +40,7 @@ class App extends Component {
   };
 
   render() {
-    const { account } = this.state;
+    const { account, errors } = this.state;
 
     return (
       <form onSubmit={this.preventDefault}>
@@ -44,6 +50,7 @@ class App extends Component {
           value={account.userName}
           onChange={this.updateUserState}
           type="text"
+          error={errors.userName}
         />
         <Input
           label="Password"
@@ -51,6 +58,7 @@ class App extends Component {
           value={account.password}
           onChange={this.updateUserState}
           type="password"
+          error={errors.password}
         />
 
         <button type="submit" className="btn btn-primary">
