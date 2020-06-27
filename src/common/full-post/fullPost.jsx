@@ -2,9 +2,14 @@ import React from "react";
 
 import "./fullPost.scss";
 
-const FullPost = props => {
-  console.log(props);
-  return <h1>Full Post with id: {props.match.params.id}</h1>;
+const FullPost = () => {
+  const data = window.selctedPost;
+  return (
+    <div className="fullPost">
+      <h1>{data.title}</h1>
+      <p>{data.content}</p>
+    </div>
+  );
 };
 
 export default FullPost;

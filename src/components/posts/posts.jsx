@@ -31,14 +31,19 @@ class Posts extends Component {
     this.setState({ selectedPostsGenre, seletedGenre: type });
   };
 
-  onPostClick = id => {
-    this.props.history.push(`/posts/${id}`);
+  onPostClick = post => {
+    this.props.history.push(`/posts/${post._id}`);
+    window.selctedPost = post;
   };
 
   render() {
     return (
       <div className="posts-containner">
-        <ContextApi.Provider value={{ genreClick: this.onGnereClick }}>
+        <ContextApi.Provider
+          value={{
+            genreClick: this.onGnereClick,
+          }}
+        >
           <div className="genreNav">
             <GenresNav />
           </div>
@@ -48,14 +53,14 @@ class Posts extends Component {
                   <Post
                     key={post._id}
                     data={post}
-                    handleClick={this.onPostClick.bind(this, post._id)}
+                    handleClick={this.onPostClick.bind(this, post)}
                   />
                 ))
               : this.state.selectedPostsGenre.map(post => (
                   <Post
                     key={post._id}
                     data={post}
-                    handleClick={this.onPostClick.bind(this, post._id)}
+                    handleClick={this.onPostClick.bind(this, post)}
                   />
                 ))}
           </div>
