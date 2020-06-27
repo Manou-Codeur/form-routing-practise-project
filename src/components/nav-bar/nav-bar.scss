@@ -1,0 +1,25 @@
+nav {
+  background-color: whitesmoke;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .link {
+    font-size: 20px;
+    color: gray;
+    margin: 0 20px;
+    text-decoration: none;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  .activeLink {
+    color: black;
+    border: 1.3px solid black;
+    padding: 2px 4px;
+    border-radius: 5px;
+  }
+}
