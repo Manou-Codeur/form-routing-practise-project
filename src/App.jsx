@@ -17,7 +17,7 @@ class App extends Component {
           <Route path="/newPost" component={NewPost} />
           <Route path="/not-found" component={NotFound} />
           <Redirect from="/" exact to="/posts" />
-          <Redirect to="not-found" />
+          <Redirect to="/not-found" />
         </Switch>
       </Fragment>
     );
