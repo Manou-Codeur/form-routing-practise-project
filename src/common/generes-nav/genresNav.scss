@@ -11,10 +11,16 @@
     font-size: 20px;
     color: gray;
     text-decoration: none;
+    cursor: pointer;
 
     &:hover {
       color: black;
     }
+  }
+
+  .selected {
+    color: black;
+    font-weight: bold;
   }
 
   .active-links {

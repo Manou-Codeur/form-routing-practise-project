@@ -14,8 +14,19 @@ class Posts extends Component {
     seletedGenre: "",
   };
 
-  onGnereClick = type => {
+  onGnereClick = (type, e) => {
+    //init
     const postsClone = [...this.state.posts];
+    const postElement = e.target;
+
+    //clean the other classes
+    for (let els of postElement.parentNode.childNodes) {
+      els.className = "link";
+    }
+    //update the current item's className
+    postElement.className += " selected";
+
+    //update the state
     const selectedPostsGenre = postsClone.filter(post => post.genre === type);
     this.setState({ selectedPostsGenre, seletedGenre: type });
   };

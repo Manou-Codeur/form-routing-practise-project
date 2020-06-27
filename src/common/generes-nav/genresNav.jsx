@@ -10,47 +10,24 @@ const GenresNav = () => {
 
   return (
     <nav className="sub-nav">
-      <NavLink
-        className="link"
-        to="/posts"
-        exact
-        activeClassName="active-links"
+      <p
+        className="link selected"
         onClick={context.genreClick.bind(this, "all")}
       >
         All
-      </NavLink>
-      <NavLink
-        className="link"
-        to="/posts/tech"
-        onClick={context.genreClick.bind(this, "tech")}
-        activeClassName="active-links"
-      >
+      </p>
+      <p className="link" onClick={context.genreClick.bind(this, "tech")}>
         Tech
-      </NavLink>
-      <NavLink
-        className="link"
-        to="/posts/sport"
-        onClick={context.genreClick.bind(this, "sport")}
-        activeClassName="active-links"
-      >
+      </p>
+      <p className="link" onClick={context.genreClick.bind(this, "sport")}>
         Sport
-      </NavLink>
-      <NavLink
-        className="link"
-        to="/posts/business"
-        onClick={context.genreClick.bind(this, "business")}
-        activeClassName="active-links"
-      >
+      </p>
+      <p className="link" onClick={context.genreClick.bind(this, "business")}>
         Business
-      </NavLink>
-      <NavLink
-        className="link"
-        to="/posts/science"
-        onClick={context.genreClick.bind(this, "science")}
-        activeClassName="active-links"
-      >
+      </p>
+      <p className="link" onClick={context.genreClick.bind(this, "science")}>
         Science
-      </NavLink>
+      </p>
     </nav>
   );
 };
