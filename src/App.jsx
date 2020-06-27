@@ -14,7 +14,7 @@ class App extends Component {
         <NavBar />
 
         <Switch>
-          <Route path="/posts/:id" component={FullPost} />
+          {/* <Route path="/posts/:id" component={FullPost} /> */}
           <Route path="/posts" component={Posts} />
           <Route path="/newPost" component={NewPost} />
           <Route path="/not-found" component={NotFound} />

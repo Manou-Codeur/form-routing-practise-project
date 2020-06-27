@@ -10,10 +10,14 @@ import "./posts.scss";
 class Posts extends Component {
   state = {
     posts: getPosts(),
+    selectedPostsGenre: [],
+    seletedGenre: "",
   };
 
   onGnereClick = type => {
-    console.log(type + " clicked");
+    const postsClone = [...this.state.posts];
+    const selectedPostsGenre = postsClone.filter(post => post.genre === type);
+    this.setState({ selectedPostsGenre, seletedGenre: type });
   };
 
   onPostClick = id => {
@@ -28,13 +32,21 @@ class Posts extends Component {
             <GenresNav />
           </div>
           <div className="allPost">
-            {this.state.posts.map(post => (
-              <Post
-                key={post._id}
-                data={post}
-                handleClick={this.onPostClick.bind(this, post._id)}
-              />
-            ))}
+            {this.state.selectedPostsGenre.length === 0
+              ? this.state.posts.map(post => (
+                  <Post
+                    key={post._id}
+                    data={post}
+                    handleClick={this.onPostClick.bind(this, post._id)}
+                  />
+                ))
+              : this.state.selectedPostsGenre.map(post => (
+                  <Post
+                    key={post._id}
+                    data={post}
+                    handleClick={this.onPostClick.bind(this, post._id)}
+                  />
+                ))}
           </div>
         </ContextApi.Provider>
       </div>

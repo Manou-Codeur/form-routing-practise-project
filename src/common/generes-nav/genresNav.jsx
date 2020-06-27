@@ -15,6 +15,7 @@ const GenresNav = () => {
         to="/posts"
         exact
         activeClassName="active-links"
+        onClick={context.genreClick.bind(this, "all")}
       >
         All
       </NavLink>
@@ -29,7 +30,7 @@ const GenresNav = () => {
       <NavLink
         className="link"
         to="/posts/sport"
-        onClick={context.genreClick.bind(this, "tech")}
+        onClick={context.genreClick.bind(this, "sport")}
         activeClassName="active-links"
       >
         Sport
@@ -37,7 +38,7 @@ const GenresNav = () => {
       <NavLink
         className="link"
         to="/posts/business"
-        onClick={context.genreClick.bind(this, "tech")}
+        onClick={context.genreClick.bind(this, "business")}
         activeClassName="active-links"
       >
         Business
@@ -45,7 +46,7 @@ const GenresNav = () => {
       <NavLink
         className="link"
         to="/posts/science"
-        onClick={context.genreClick.bind(this, "tech")}
+        onClick={context.genreClick.bind(this, "science")}
         activeClassName="active-links"
       >
         Science
