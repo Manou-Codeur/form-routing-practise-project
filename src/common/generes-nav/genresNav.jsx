@@ -1,19 +1,55 @@
 import React, { useContext } from "react";
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ContextApi from "../contextApi";
+
+import "./genresNav.scss";
 
 const GenresNav = () => {
   const context = useContext(ContextApi);
 
   return (
     <nav className="sub-nav">
-      <Link to="/posts/tech" onClick={context.genreClick.bind(this, "tech")}>
+      <NavLink
+        className="link"
+        to="/posts"
+        exact
+        activeClassName="active-links"
+      >
+        All
+      </NavLink>
+      <NavLink
+        className="link"
+        to="/posts/tech"
+        onClick={context.genreClick.bind(this, "tech")}
+        activeClassName="active-links"
+      >
         Tech
-      </Link>
-      <Link to="/posts/sport">Sport</Link>
-      <Link to="/posts/businnes">Bussines</Link>
-      <Link to="/posts/science">Science</Link>
+      </NavLink>
+      <NavLink
+        className="link"
+        to="/posts/sport"
+        onClick={context.genreClick.bind(this, "tech")}
+        activeClassName="active-links"
+      >
+        Sport
+      </NavLink>
+      <NavLink
+        className="link"
+        to="/posts/business"
+        onClick={context.genreClick.bind(this, "tech")}
+        activeClassName="active-links"
+      >
+        Business
+      </NavLink>
+      <NavLink
+        className="link"
+        to="/posts/science"
+        onClick={context.genreClick.bind(this, "tech")}
+        activeClassName="active-links"
+      >
+        Science
+      </NavLink>
     </nav>
   );
 };
