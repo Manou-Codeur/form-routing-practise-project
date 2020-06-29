@@ -79,5 +79,5 @@ export const getPosts = () => {
 
 export const getChosenPost = id => {
   const data = posts.filter(post => post._id === id);
-  return data[0];
+  return data.length > 0 ? data[0] : { _id: 0 };
 };
