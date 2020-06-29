@@ -1,22 +1,27 @@
-import React from "react";
+import React, { Component } from "react";
+
+import { getChosenPost } from "../../assets/fakeData";
 
 import "./fullPost.scss";
 
-const FullPost = props => {
-  const data = window.selectedPost;
-  const handleBack = () => {
-    props.history.push("/posts");
+class FullPost extends Component {
+  handleBack = () => {
+    this.props.history.push("/posts");
   };
 
-  return (
-    <div className="fullPost">
-      <h1>{data.title}</h1>
-      <p>{data.content}</p>
-      <button className="btn btn-primary" onClick={handleBack}>
-        Back
-      </button>
-    </div>
-  );
-};
+  render() {
+    const data = getChosenPost();
+
+    return (
+      <div className="fullPost">
+        <h1>{data.title}</h1>
+        <p>{data.content}</p>
+        <button className="btn btn-primary" onClick={this.handleBack}>
+          Back
+        </button>
+      </div>
+    );
+  }
+}
 
 export default FullPost;
