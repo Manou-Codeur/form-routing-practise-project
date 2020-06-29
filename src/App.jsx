@@ -5,7 +5,7 @@ import NavBar from "./components/nav-bar/navBar";
 import Posts from "./components/posts/posts";
 import NewPost from "./components/new-post/newPost";
 import FullPost from "./common/full-post/fullPost";
-import NotFound from "./components/not-found/notFound";
+import NotFound from "./common/not-found/notFound";
 
 class App extends Component {
   render() {

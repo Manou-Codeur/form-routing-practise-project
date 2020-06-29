@@ -1,0 +1,12 @@
+.newForm {
+  width: 50%;
+  margin: 50px auto;
+  position: relative;
+
+  .btn-primary {
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
