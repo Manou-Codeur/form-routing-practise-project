@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 
+import { addPost } from "../../assets/fakeData";
+
 import "./newPost.scss";
 
 class NewPost extends Component {
@@ -16,11 +18,21 @@ class NewPost extends Component {
   schema = {
     title: Joi.string().required().label("Title"),
     genre: Joi.string().required().label("Genre"),
-    txtArea: Joi.string().required().min(20).max(500).label("Post content"),
+    txtArea: Joi.string().required().min(20).max(2000).label("Post content"),
   };
 
   doSubmit = () => {
-    console.log("do submit");
+    const post = {};
+
+    post.title = this.state.data.title;
+    post.genre = this.state.data.genre.toLowerCase();
+    post._id = new Date().getMilliseconds().toString();
+    post.content = this.state.data.txtArea;
+    post.subContent = this.state.data.txtArea.split(" ").slice(0, 20).join(" ");
+
+    addPost(post);
+
+    this.props.history.replace("/posts");
   };
 
   validateSubmit = e => {
