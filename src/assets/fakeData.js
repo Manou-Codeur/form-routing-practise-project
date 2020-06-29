@@ -73,20 +73,11 @@ const posts = [
   },
 ];
 
-let chosenPost;
-
 export const getPosts = () => {
   return posts;
 };
 
-export const chosePost = id => {
-  for (let els of posts) {
-    if (els._id === id) {
-      chosenPost = els;
-    }
-  }
-};
-
-export const getChosenPost = () => {
-  return chosenPost;
+export const getChosenPost = id => {
+  const data = posts.filter(post => post._id === id);
+  return data[0];
 };

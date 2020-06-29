@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Post from "../../common/post/post";
 import GenresNav from "../../common/generes-nav/genresNav";
 import ContextApi from "../../common/contextApi";
-import { getPosts, chosePost } from "../../assets/fakeData";
+import { getPosts } from "../../assets/fakeData";
 
 import "./posts.scss";
 
@@ -32,8 +32,6 @@ class Posts extends Component {
   };
 
   onPostClick = post => {
-    chosePost(post._id);
-
     this.props.history.push(`/posts/${post._id}`);
   };
 
