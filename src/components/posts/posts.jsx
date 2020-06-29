@@ -33,7 +33,7 @@ class Posts extends Component {
 
   onPostClick = post => {
     this.props.history.push(`/posts/${post._id}`);
-    window.selctedPost = post;
+    window.selectedPost = post;
   };
 
   render() {
