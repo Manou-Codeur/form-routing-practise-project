@@ -25,7 +25,13 @@ class NewPost extends Component {
   };
 
   componentDidUpdate = () => {
-    //i'll check if there is no error in state
+    this.btn.disabled = false;
+    const { data, errors } = this.state;
+
+    for (let els in data) {
+      if (data[els] === "") this.btn.disabled = true;
+    }
+    if (Object.keys(errors).length > 0) this.btn.disabled = true;
   };
 
   validateSubmit = e => {
@@ -114,7 +120,13 @@ class NewPost extends Component {
           value={txtArea}
         />
 
-        <button className="btn btn-primary">Add</button>
+        <button
+          className="btn btn-primary"
+          disabled
+          ref={el => (this.btn = el)}
+        >
+          Add
+        </button>
       </form>
     );
   }

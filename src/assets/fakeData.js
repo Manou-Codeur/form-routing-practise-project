@@ -84,5 +84,4 @@ export const getChosenPost = id => {
 
 export const addPost = post => {
   posts.push(post);
-  console.log(post);
 };
