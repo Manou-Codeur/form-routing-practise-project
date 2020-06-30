@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 
 import { addPost } from "../../assets/fakeData";
+import Input from "../../common/input/Input";
+import Select from "../../common/input/select";
+import TextArea from "../../common/input/textArea";
 
 import "./newPost.scss";
 
@@ -21,18 +24,8 @@ class NewPost extends Component {
     txtArea: Joi.string().required().min(20).max(2000).label("Post content"),
   };
 
-  doSubmit = () => {
-    const post = {};
-
-    post.title = this.state.data.title;
-    post.genre = this.state.data.genre.toLowerCase();
-    post._id = new Date().getMilliseconds().toString();
-    post.content = this.state.data.txtArea;
-    post.subContent = this.state.data.txtArea.split(" ").slice(0, 20).join(" ");
-
-    addPost(post);
-
-    this.props.history.replace("/posts");
+  componentDidUpdate = () => {
+    //i'll check if there is no error in state
   };
 
   validateSubmit = e => {
@@ -51,6 +44,20 @@ class NewPost extends Component {
     if (Object.keys(myError).length === 0) {
       this.doSubmit();
     }
+  };
+
+  doSubmit = () => {
+    const post = {};
+
+    post.title = this.state.data.title;
+    post.genre = this.state.data.genre.toLowerCase();
+    post._id = new Date().getMilliseconds().toString();
+    post.content = this.state.data.txtArea;
+    post.subContent = this.state.data.txtArea.split(" ").slice(0, 20).join(" ");
+
+    addPost(post);
+
+    this.props.history.replace("/posts");
   };
 
   handleInputChange = ({ target }) => {
@@ -79,57 +86,34 @@ class NewPost extends Component {
   render() {
     const { title, genre, txtArea } = this.state.data;
     const { errors } = this.state;
+
     return (
       <form className="newForm" onSubmit={this.validateSubmit}>
-        <div className="form-group">
-          <label htmlFor="exampleFormControlInput1">Post title</label>
-          <input
-            name="title"
-            type="text"
-            className="form-control"
-            id="exampleFormControlInput1"
-            onChange={this.handleInputChange}
-            value={title}
-          />
-          {errors.title && (
-            <div className="alert alert-danger">{errors.title}</div>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleFormControlSelect1">Genre</label>
-          <select
-            name="genre"
-            className="form-control"
-            id="exampleFormControlSelect1"
-            onChange={this.handleInputChange}
-            value={genre}
-          >
-            <option></option>
-            <option>Tech</option>
-            <option>Sport</option>
-            <option>Business</option>
-            <option>Science</option>
-          </select>
-          {errors.genre && (
-            <div className="alert alert-danger">{errors.genre}</div>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleFormControlTextarea1">Post content</label>
-          <textarea
-            name="txtArea"
-            className="form-control"
-            id="exampleFormControlTextarea1"
-            rows="8"
-            onChange={this.handleInputChange}
-            value={txtArea}
-          ></textarea>
-          {this.state.errors.txtArea && (
-            <div className="alert alert-danger">
-              {this.state.errors.txtArea}
-            </div>
-          )}
-        </div>
+        <Input
+          label="Post title"
+          name="title"
+          value={title}
+          handleInputChange={this.handleInputChange}
+          errors={errors}
+        />
+
+        <Select
+          label="Genre"
+          errors={errors}
+          handleInputChange={this.handleInputChange}
+          items={["Tech", "Sport", "Business", "Science"]}
+          name="genre"
+          value={genre}
+        />
+
+        <TextArea
+          label="Post content"
+          handleInputChange={this.handleInputChange}
+          errors={errors}
+          name="txtArea"
+          value={txtArea}
+        />
+
         <button className="btn btn-primary">Add</button>
       </form>
     );
